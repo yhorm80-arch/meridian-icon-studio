@@ -32,3 +32,4 @@ use the editor.
 ## Application structure
 
 - Keep content routes in `src/routes` and shared visual tokens and app-wide styling in `src/styles.css`; keep the search, program overview, and relationship graph in one route so their shared dashboard state stays available.
+- Render decorative icons through `IconTile` (`src/components/icon-tile.tsx`) with a tone name; tone colors live as `--tone-*` tokens in `src/styles.css` so icon palettes stay consistent across views.
