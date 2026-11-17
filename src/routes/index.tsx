@@ -83,6 +83,8 @@ const graphNavItems: IconItem[] = [
   { label: "API", icon: Plug, tone: "blush" },
 ];
 
+const resultTones: IconTone[] = ["violet", "mint", "sky", "amber", "blush", "rose"];
+
 const copybooks: { name: string; note: string; tone: IconTone }[] = [
   { name: "CPYACCT", note: "Account data structures", tone: "sky" },
   { name: "CPYERR", note: "Error handling definitions", tone: "blush" },
@@ -285,7 +287,7 @@ function MeridianApp() {
                 <section className={`result-card ${expanded === index ? "is-expanded" : ""}`} key={`${row.program}-${index}`}>
                   <button className="result-head" onClick={() => setExpanded(expanded === index ? null : index)} aria-expanded={expanded === index}>
                     <span className="result-rank">#{index + 1}</span>
-                    <IconTile icon={FileCode2} tone={(["violet", "mint", "sky", "amber", "blush", "rose"] as IconTone[])[index % 6]} size="sm" />
+                    <IconTile icon={FileCode2} tone={resultTones[index % resultTones.length] ?? "violet"} size="sm" />
                     <strong className="result-program">{row.program}</strong>
                     <span className="match-badge">{row.match}</span>
                     <span className="result-score">Score: {row.score}</span>
