@@ -86,8 +86,8 @@
   --popover-foreground: oklch(0.25 0.055 270);
   --primary: oklch(0.34 0.075 270);
   --primary-foreground: oklch(0.99 0.004 275);
-  --secondary: oklch(0.94 0.035 332);
-  --secondary-foreground: oklch(0.43 0.12 345);
+  --secondary: oklch(0.93 0.04 260);
+  --secondary-foreground: oklch(0.42 0.13 265);
   --muted: oklch(0.95 0.015 275);
   --muted-foreground: oklch(0.53 0.035 270);
   --accent: oklch(0.93 0.055 174);
@@ -100,21 +100,21 @@
   --chart-1: oklch(0.43 0.12 275);
   --chart-2: oklch(0.65 0.12 174);
   --chart-3: oklch(0.69 0.16 20);
-  --chart-4: oklch(0.68 0.12 325);
+  --chart-4: oklch(0.68 0.12 285);
   --chart-5: oklch(0.76 0.13 80);
   --sidebar: oklch(0.985 0.008 278);
   --sidebar-foreground: oklch(0.38 0.045 270);
   --sidebar-primary: oklch(0.34 0.075 270);
   --sidebar-primary-foreground: oklch(0.99 0.004 275);
-  --sidebar-accent: oklch(0.94 0.035 332);
-  --sidebar-accent-foreground: oklch(0.43 0.12 345);
+  --sidebar-accent: oklch(0.93 0.04 260);
+  --sidebar-accent-foreground: oklch(0.42 0.13 265);
   --sidebar-border: oklch(0.9 0.022 278);
   --sidebar-ring: oklch(0.58 0.12 280);
   --graph-center: oklch(0.34 0.075 270);
   --graph-node-1: oklch(0.65 0.12 174);
   --graph-node-2: oklch(0.69 0.16 20);
   --graph-node-3: oklch(0.76 0.13 80);
-  --graph-node-4: oklch(0.68 0.12 325);
+  --graph-node-4: oklch(0.68 0.12 285);
   --graph-node-5: oklch(0.58 0.12 280);
   --surface-muted: oklch(0.955 0.015 278);
   --critical: oklch(0.58 0.19 24);
@@ -146,8 +146,8 @@
   --popover-foreground: oklch(0.96 0.012 278);
   --primary: oklch(0.78 0.095 175);
   --primary-foreground: oklch(0.2 0.04 275);
-  --secondary: oklch(0.32 0.055 330);
-  --secondary-foreground: oklch(0.93 0.04 340);
+  --secondary: oklch(0.32 0.06 262);
+  --secondary-foreground: oklch(0.93 0.04 260);
   --muted: oklch(0.27 0.04 275);
   --muted-foreground: oklch(0.72 0.035 278);
   --accent: oklch(0.32 0.065 175);
@@ -161,15 +161,15 @@
   --sidebar-foreground: oklch(0.9 0.02 278);
   --sidebar-primary: oklch(0.78 0.095 175);
   --sidebar-primary-foreground: oklch(0.2 0.04 275);
-  --sidebar-accent: oklch(0.32 0.055 330);
-  --sidebar-accent-foreground: oklch(0.93 0.04 340);
+  --sidebar-accent: oklch(0.32 0.06 262);
+  --sidebar-accent-foreground: oklch(0.93 0.04 260);
   --sidebar-border: oklch(1 0 0 / 12%);
   --sidebar-ring: oklch(0.78 0.095 175);
   --graph-center: oklch(0.78 0.095 175);
   --graph-node-1: oklch(0.78 0.095 175);
   --graph-node-2: oklch(0.76 0.14 20);
   --graph-node-3: oklch(0.82 0.13 80);
-  --graph-node-4: oklch(0.76 0.12 325);
+  --graph-node-4: oklch(0.76 0.12 285);
   --graph-node-5: oklch(0.72 0.11 280);
   --surface-muted: oklch(0.25 0.04 275);
   --critical: oklch(0.76 0.14 24);
@@ -365,12 +365,12 @@
   .icon-tile-md svg { width: 19px; height: 19px; }
   .icon-tile-lg { width: 50px; height: 50px; border-radius: 15px; }
   .icon-tile-lg svg { width: 24px; height: 24px; }
-  .tone-violet { --tile-ink: var(--tone-violet); --tile-bg: var(--tone-violet-soft); }
-  .tone-mint { --tile-ink: var(--tone-mint); --tile-bg: var(--tone-mint-soft); }
-  .tone-blush { --tile-ink: var(--tone-blush); --tile-bg: var(--tone-blush-soft); }
-  .tone-amber { --tile-ink: var(--tone-amber); --tile-bg: var(--tone-amber-soft); }
+  .tone-violet { --tile-ink: var(--tone-sky); --tile-bg: var(--tone-sky-soft); }
+  .tone-mint { --tile-ink: var(--tone-sky); --tile-bg: var(--tone-sky-soft); }
+  .tone-blush { --tile-ink: var(--tone-sky); --tile-bg: var(--tone-sky-soft); }
+  .tone-amber { --tile-ink: var(--tone-sky); --tile-bg: var(--tone-sky-soft); }
   .tone-sky { --tile-ink: var(--tone-sky); --tile-bg: var(--tone-sky-soft); }
-  .tone-rose { --tile-ink: var(--tone-rose); --tile-bg: var(--tone-rose-soft); }
+  .tone-rose { --tile-ink: var(--tone-sky); --tile-bg: var(--tone-sky-soft); }
   .nav-item .icon-tile, .graph-nav-item .icon-tile { transition: transform .2s ease; }
   .nav-item:hover .icon-tile, .graph-nav-item:hover .icon-tile { transform: translateY(-1px) rotate(-4deg); }
   .nav-item.is-current .icon-tile { box-shadow: 0 3px 8px -3px var(--tile-ink), inset 0 0 0 1px color-mix(in oklab, var(--tile-ink) 25%, transparent); }
