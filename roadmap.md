@@ -1,0 +1,4 @@
+- [x] Bring in the Meridian CI dashboard from the uploaded project.
+- [x] Remove the finance infographic background image.
+- [x] Add colorful 2D icons across menus and all pages.
+- [x] Add a 3D Meridian logo (header + browser tab icon).

@@ -1,0 +1,18 @@
+{
+  "source": "code-archive: seo-insights-dashboard-main.zip",
+  "capabilities": [
+    { "capability": "application code", "source": "archive; dashboard route and styles", "outcome": "Implemented the supplied Meridian search, overview, and relationship graph screens in the project.", "status": "verified", "next_action": "None for the requested preview." },
+    { "capability": "schema", "source": "archive inspection; no schema found", "outcome": "No application schema or external data store detected.", "status": "absent", "next_action": "None for this visual-output request." },
+    { "capability": "application records", "source": "archive inspection; no data export found", "outcome": "Dashboard examples are in-screen sample data; no record export or live source records were supplied.", "status": "absent", "next_action": "Provide a record export only if existing live data needs to appear in the app." },
+    { "capability": "authentication identities", "source": "archive inspection; no auth integration detected", "outcome": "No user authentication capability detected.", "status": "absent", "next_action": "None for this request." },
+    { "capability": "authorization", "source": "archive inspection; no access-control logic detected", "outcome": "No authorization capability detected.", "status": "absent", "next_action": "None for this request." },
+    { "capability": "uploaded file bytes", "source": "provided archive", "outcome": "Archive inspected safely; source was code and no user-uploaded content assets were required for the requested redesign.", "status": "verified", "next_action": "None." },
+    { "capability": "external providers", "source": "archive inspection; none detected", "outcome": "No external service integrations detected.", "status": "absent", "next_action": "None for this request." },
+    { "capability": "public endpoints", "source": "archive inspection; none detected", "outcome": "No public API endpoints detected.", "status": "absent", "next_action": "None for this request." },
+    { "capability": "callbacks and webhooks", "source": "archive inspection; none detected", "outcome": "No callbacks or webhooks detected.", "status": "absent", "next_action": "None for this request." },
+    { "capability": "schedules", "source": "archive inspection; none detected", "outcome": "No scheduled tasks detected.", "status": "absent", "next_action": "None for this request." },
+    { "capability": "secrets", "source": "archive inspection; none detected", "outcome": "No application secrets or required environment variables detected.", "status": "absent", "next_action": "None." },
+    { "capability": "cutover", "source": "archive inspection; no external system or production URL configured", "outcome": "No production cutover identified for this local preview redesign.", "status": "not_applicable", "next_action": "None for this request." },
+    { "capability": "verification", "source": "local preview", "outcome": "Search, network graph, program overview, relationship infographic, responsive phone layout, and browser console checked successfully.", "status": "verified", "next_action": "None for the requested preview." }
+  ]
+}
