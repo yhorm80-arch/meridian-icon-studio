@@ -4,24 +4,43 @@ import {
   Activity,
   ArrowLeft,
   ArrowRight,
+  Boxes,
+  Braces,
   ChevronDown,
   ChevronRight,
+  CircleCheck,
   CircleHelp,
   Code2,
+  Cpu,
   Database,
   FileCode2,
+  FileSearch,
+  Filter,
+  Gauge,
   GitBranch,
+  History,
   Landmark,
   Layers3,
+  LayoutDashboard,
   Link2,
+  ListTree,
   Network,
+  Plug,
+  Scale,
   Search,
   ShieldAlert,
   SlidersHorizontal,
   Sparkles,
+  Table2,
+  UserRound,
+  Workflow,
+  Zap,
+  type LucideIcon,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { IconTile, type IconTone } from "@/components/icon-tile";
+import meridianLogo from "@/assets/meridian-logo-3d.png";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -44,6 +63,31 @@ export const Route = createFileRoute("/")({
 });
 
 type View = "search" | "overview" | "graph";
+
+type IconItem = { label: string; icon: LucideIcon; tone: IconTone };
+
+const sectionItems: IconItem[] = [
+  { label: "Overview", icon: LayoutDashboard, tone: "violet" },
+  { label: "Business rules", icon: Scale, tone: "mint" },
+  { label: "Dependencies", icon: GitBranch, tone: "amber" },
+  { label: "Data & SQL", icon: Database, tone: "sky" },
+  { label: "Source", icon: FileCode2, tone: "blush" },
+  { label: "History", icon: History, tone: "rose" },
+];
+
+const graphNavItems: IconItem[] = [
+  { label: "Graph", icon: Network, tone: "violet" },
+  { label: "Impact", icon: Zap, tone: "amber" },
+  { label: "Lineage", icon: Workflow, tone: "mint" },
+  { label: "Code", icon: Code2, tone: "sky" },
+  { label: "API", icon: Plug, tone: "blush" },
+];
+
+const copybooks: { name: string; note: string; tone: IconTone }[] = [
+  { name: "CPYACCT", note: "Account data structures", tone: "sky" },
+  { name: "CPYERR", note: "Error handling definitions", tone: "blush" },
+  { name: "CPYTAXP", note: "Tax parameter layouts", tone: "mint" },
+];
 
 const programs = [
   { name: "CEE3DLY", risk: "low" },
@@ -164,11 +208,11 @@ function MeridianApp() {
     <div className="meridian-app">
       <header className="topbar">
         <button className="brand" onClick={() => setView("search")} aria-label="Meridian CI home">
-          <span className="brand-mark"><Landmark aria-hidden="true" /></span>
-          <span>Meridian CI</span>
+          <span className="brand-mark-3d"><img src={meridianLogo} alt="" width={256} height={256} /></span>
+          <span className="brand-text">Meridian <em>CI</em></span>
         </button>
         <form className="top-search" onSubmit={submitSearch}>
-          <Search size={15} aria-hidden="true" />
+          <IconTile icon={Search} tone="sky" size="xs" />
           <Input
             value={query}
             onChange={(event) => setQuery(event.target.value)}
@@ -177,23 +221,23 @@ function MeridianApp() {
           />
           <Button size="icon" aria-label="Search" type="submit"><Search /></Button>
         </form>
-        <button className="persona-pill" onClick={() => notify("Business persona selected")}>Persona: Business</button>
-        <button className="help-button" aria-label="Help" onClick={() => notify("Meridian CI help center")}><CircleHelp size={19} /></button>
+        <button className="persona-pill" onClick={() => notify("Business persona selected")}><IconTile icon={UserRound} tone="mint" size="xs" />Persona: Business</button>
+        <button className="help-button" aria-label="Help" onClick={() => notify("Meridian CI help center")}><IconTile icon={CircleHelp} tone="amber" size="sm" /></button>
       </header>
 
       {view === "search" && (
         <div className="workspace search-workspace">
           <aside className="left-rail">
             <nav className="primary-nav" aria-label="Main navigation">
-              <button className="nav-item is-current"><Search size={16} />Search</button>
-              <button className="nav-item" onClick={openGraph}><Network size={16} />Graph</button>
-              <button className="nav-item" onClick={() => notify("Risk summary selected")}><ShieldAlert size={16} />Risk summary</button>
-              <button className="nav-item" onClick={() => notify("Dependencies selected")}><GitBranch size={16} />Dependencies</button>
-              <button className="nav-item" onClick={() => notify("Integrity selected")}><Activity size={16} />Integrity</button>
-              <button className="nav-item" onClick={() => notify("Curation selected")}><Layers3 size={16} />Curation</button>
+              <button className="nav-item is-current"><IconTile icon={Search} tone="sky" />Search</button>
+              <button className="nav-item" onClick={openGraph}><IconTile icon={Network} tone="violet" />Graph</button>
+              <button className="nav-item" onClick={() => notify("Risk summary selected")}><IconTile icon={ShieldAlert} tone="blush" />Risk summary</button>
+              <button className="nav-item" onClick={() => notify("Dependencies selected")}><IconTile icon={GitBranch} tone="amber" />Dependencies</button>
+              <button className="nav-item" onClick={() => notify("Integrity selected")}><IconTile icon={Activity} tone="mint" />Integrity</button>
+              <button className="nav-item" onClick={() => notify("Curation selected")}><IconTile icon={Layers3} tone="rose" />Curation</button>
             </nav>
             <div className="rail-section">
-              <div className="rail-label">Risk summary</div>
+              <div className="rail-label"><IconTile icon={Gauge} tone="blush" size="xs" />Risk summary</div>
               {programs.map((program) => (
                 <button key={program.name} className="risk-program" onClick={() => { setQuery(program.name); submitSearch(); }}>
                   <span className={`risk-dot ${program.risk}`} />{program.name}
@@ -201,44 +245,46 @@ function MeridianApp() {
               ))}
             </div>
             <div className="rail-section coupling-section">
-              <div className="rail-label">Program couplings</div>
-              {couplings.map(([a, b]) => <button className="coupling" key={`${a}-${b}`} onClick={() => { setQuery(a); submitSearch(); }}><strong>{a} → {b}</strong><span>COUPLED_VIA_SQL · conf 0.90</span></button>)}
+              <div className="rail-label"><IconTile icon={Link2} tone="violet" size="xs" />Program couplings</div>
+              {couplings.map(([a, b]) => <button className="coupling" key={`${a}-${b}`} onClick={() => { setQuery(a); submitSearch(); }}><IconTile icon={Link2} tone="sky" size="xs" /><span className="coupling-text"><strong>{a} → {b}</strong><span>COUPLED_VIA_SQL · conf 0.90</span></span></button>)}
             </div>
           </aside>
 
           <main className="main-content search-main">
             <div className="page-heading">
-              <div>
+              <div className="page-heading-main">
+                <IconTile icon={Landmark} tone="violet" size="lg" />
+                <div>
                 <div className="eyebrow"><span className="eyebrow-dot" />Connected intelligence</div>
                 <h1>Meridian Connected Intelligence Platform</h1>
                 <p>Trade and Settlement Banking System <span className="heading-separator">—</span> Legacy COBOL Knowledge Graph</p>
+                </div>
               </div>
               <div className="heading-status"><span className="status-indicator" /> Systems online</div>
             </div>
             <form className="query-form" onSubmit={submitSearch}>
-              <div className="query-input-wrap"><Search size={18} /><Input aria-label="Search query" value={query} onChange={(event) => setQuery(event.target.value)} /></div>
+              <div className="query-input-wrap"><IconTile icon={Search} tone="sky" size="sm" /><Input aria-label="Search query" value={query} onChange={(event) => setQuery(event.target.value)} /></div>
               <Button type="submit" className="primary-action"><Search size={16} />Search</Button>
               <Button type="button" variant="outline" onClick={() => setShowAll((value) => !value)}>{showAll ? "Show fewer" : "Show more results"}</Button>
             </form>
             <div className="suggestions"><span>Try:</span>{["GLPOST01", "tax", "settlement", "WS-BUS-DATE", "reconciliation"].map((item, i) => <button className={i === 2 ? "suggestion is-highlighted" : "suggestion"} key={item} onClick={() => { setQuery(item); submitSearch(); }}>{item}</button>)}</div>
 
             <section className="intelligence-summary">
-              <div className="summary-heading"><Sparkles size={15} /> Intelligence summary <span className="summary-live">AI INSIGHT</span></div>
+              <div className="summary-heading"><IconTile icon={Sparkles} tone="violet" size="sm" /> Intelligence summary <span className="summary-live">AI INSIGHT</span></div>
               <p>Based on the system analysis, <strong>INTPOST2.cbl</strong> uses three copybooks:</p>
-              <ul>
-                <li><strong>CPYACCT</strong> — Account data structures</li>
-                <li><strong>CPYERR</strong> — Error handling definitions</li>
-                <li><strong>CPYTAXP</strong> — Tax parameter layouts</li>
+              <ul className="copybook-list">
+                {copybooks.map((book) => <li key={book.name}><IconTile icon={FileCode2} tone={book.tone} size="sm" /><span><strong>{book.name}</strong> — {book.note}</span></li>)}
               </ul>
               <p className="summary-last">These are declared in the program&apos;s COPY statements and provide shared record layouts for account processing, error logging, and tax calculation interfaces. INTPOST2 is rated <strong className="critical-text">Critical</strong> modernisation risk due to its core role in deposit interest posting and tight SQL/data coupling with GLPOST01, RECON001, and TRDSETL1.</p>
             </section>
 
-            <div className="results-meta">Found <strong>{searched ? 8 : 3} results</strong> for <strong>{query || "all programs"}</strong><button onClick={() => notify("Results sorted by relevance")}><SlidersHorizontal size={14} /> Relevance</button></div>
+            <div className="results-meta">Found <strong>{searched ? 8 : 3} results</strong> for <strong>{query || "all programs"}</strong><button onClick={() => notify("Results sorted by relevance")}><IconTile icon={SlidersHorizontal} tone="amber" size="xs" /> Relevance</button></div>
             <div className="result-list">
               {resultRows.slice(0, showAll || searched ? resultRows.length : 3).map((row, index) => (
                 <section className={`result-card ${expanded === index ? "is-expanded" : ""}`} key={`${row.program}-${index}`}>
                   <button className="result-head" onClick={() => setExpanded(expanded === index ? null : index)} aria-expanded={expanded === index}>
                     <span className="result-rank">#{index + 1}</span>
+                    <IconTile icon={FileCode2} tone={(["violet", "mint", "sky", "amber", "blush", "rose"] as IconTone[])[index % 6]} size="sm" />
                     <strong className="result-program">{row.program}</strong>
                     <span className="match-badge">{row.match}</span>
                     <span className="result-score">Score: {row.score}</span>
@@ -247,10 +293,10 @@ function MeridianApp() {
                   {expanded === index && (
                     <div className="result-detail">
                       <div className="result-fields">
-                        <div><span>Program</span><strong>INTPOST2</strong></div>
-                        <div><span>Technology</span><strong>COBOL</strong></div>
-                        <div><span>Score</span><strong>1.0000</strong></div>
-                        <div><span>Modernisation risk</span><strong className="risk-badge">Critical</strong></div>
+                        <div><IconTile icon={FileCode2} tone="violet" size="sm" /><span>Program</span><strong>INTPOST2</strong></div>
+                        <div><IconTile icon={Cpu} tone="sky" size="sm" /><span>Technology</span><strong>COBOL</strong></div>
+                        <div><IconTile icon={Gauge} tone="mint" size="sm" /><span>Score</span><strong>1.0000</strong></div>
+                        <div><IconTile icon={ShieldAlert} tone="blush" size="sm" /><span>Modernisation risk</span><strong className="risk-badge">Critical</strong></div>
                       </div>
                       <Button onClick={openOverview} className="overview-action">Open Overview for INTPOST2 <ArrowRight size={15} /></Button>
                     </div>
@@ -258,7 +304,7 @@ function MeridianApp() {
                 </section>
               ))}
             </div>
-            <details className="raw-response"><summary>Raw JSON response</summary><pre>{JSON.stringify({ query, count: 8, program: "INTPOST2", score: 1 }, null, 2)}</pre></details>
+            <details className="raw-response"><summary><IconTile icon={Braces} tone="amber" size="xs" />Raw JSON response</summary><pre>{JSON.stringify({ query, count: 8, program: "INTPOST2", score: 1 }, null, 2)}</pre></details>
           </main>
         </div>
       )}
@@ -268,21 +314,21 @@ function MeridianApp() {
           <aside className="left-rail overview-rail">
             <button className="back-rail" onClick={() => setView("search")}><ArrowLeft size={15} /> Back</button>
             <nav className="overview-nav" aria-label="Program sections">
-              {["Overview", "Business rules", "Dependencies", "Data & SQL", "Source", "History"].map((item) => <button key={item} className={`nav-item ${activeTab === item ? "is-current" : ""}`} onClick={() => setActiveTab(item)}>{item}</button>)}
+              {sectionItems.map((item) => <button key={item.label} className={`nav-item ${activeTab === item.label ? "is-current" : ""}`} onClick={() => setActiveTab(item.label)}><IconTile icon={item.icon} tone={item.tone} />{item.label}</button>)}
             </nav>
           </aside>
           <main className="main-content overview-main">
             <button className="inline-back" onClick={() => setView("search")}><ArrowLeft size={15} />Back to search</button>
             <div className="breadcrumbs">Portfolio <ChevronRight size={13} /> Settlement <ChevronRight size={13} /> <strong>INTPOST2</strong></div>
-            <div className="program-title"><h1>INTPOST2</h1><span>Interest Posting</span><span className="program-chip"><span className="risk-dot high" /> Critical risk</span></div>
+            <div className="program-title"><IconTile icon={FileCode2} tone="violet" size="lg" /><h1>INTPOST2</h1><span>Interest Posting</span><span className="program-chip"><span className="risk-dot high" /> Critical risk</span></div>
             <nav className="tabs" aria-label="Program details">
-              {["Overview", "Business rules", "Dependencies", "Data & SQL", "Source", "History"].map((tab) => <button key={tab} className={activeTab === tab ? "tab is-active" : "tab"} onClick={() => setActiveTab(tab)}>{tab}</button>)}
+              {sectionItems.map((tab) => <button key={tab.label} className={activeTab === tab.label ? "tab is-active" : "tab"} onClick={() => setActiveTab(tab.label)}><IconTile icon={tab.icon} tone={tab.tone} size="xs" />{tab.label}</button>)}
             </nav>
             {activeTab === "Overview" ? <div className="overview-grid">
-              <section className="data-panel paragraphs-panel"><PanelHeading title="Paragraphs" subtitle="Click to open source" /><div className="paragraph-list">{paragraphs.map((p) => <button key={p} className="paragraph-row" onClick={() => { setActiveTab("Source"); notify(`${p} source opened`); }}><strong>{p}</strong><span>PERFORMS</span></button>)}</div></section>
-              <section className="data-panel relationships-panel"><PanelHeading title="Relationships" subtitle="Click to drill through" /><div className="relationship-list">{relationships.map(([label, value]) => <button className="relationship-row" key={String(label)} onClick={() => { setQuery(String(label)); openGraph(); }}><span className="relationship-name">{label}</span><span className="bar-track"><span style={{ width: `${Math.max(Number(value) / 82 * 100, 2)}%` }} /></span><span className="relationship-count">{value}</span></button>)}</div></section>
-              <section className="data-panel evidence-panel"><PanelHeading title="Evidence" /><pre className="code-evidence">{`PERFORM 0000-MAINLINE\nPERFORM 1000-INITIALIZE\nCALL 'TAXCALC'\nCALL 'CEE3DLY'\nSQL --> INCLUDE\nSQL --> DECLARE`}</pre><div className="evidence-caption">INTPOST2.cbl · Parsed successfully</div><div className="evidence-actions"><Button onClick={openGraph}><Network size={15} />Open in graph</Button><Button variant="outline" onClick={() => notify("Impact analysis is ready")}>Impact analysis</Button><Button variant="outline" onClick={() => notify("Added to modernisation wave")}>Add to wave</Button><Button variant="outline" onClick={() => notify("Flagged for review")}>Flag for review</Button></div></section>
-            </div> : <section className="tab-content-panel"><PanelHeading title={activeTab} subtitle="INTPOST2 · Interest Posting" /><p>This program is connected to the settlement processing domain and shares data structures with account, tax, and reconciliation workflows.</p><div className="tab-content-stats"><span><strong>15</strong> paragraphs</span><span><strong>6</strong> copybooks</span><span><strong>23</strong> referenced tables</span></div><Button onClick={openGraph}><Network size={15} />Explore relationships</Button></section>}
+              <section className="data-panel paragraphs-panel"><PanelHeading icon={ListTree} tone="mint" title="Paragraphs" subtitle="Click to open source" /><div className="paragraph-list">{paragraphs.map((p) => <button key={p} className="paragraph-row" onClick={() => { setActiveTab("Source"); notify(`${p} source opened`); }}><strong>{p}</strong><span>PERFORMS</span></button>)}</div></section>
+              <section className="data-panel relationships-panel"><PanelHeading icon={Network} tone="violet" title="Relationships" subtitle="Click to drill through" /><div className="relationship-list">{relationships.map(([label, value]) => <button className="relationship-row" key={String(label)} onClick={() => { setQuery(String(label)); openGraph(); }}><span className="relationship-name">{label}</span><span className="bar-track"><span style={{ width: `${Math.max(Number(value) / 82 * 100, 2)}%` }} /></span><span className="relationship-count">{value}</span></button>)}</div></section>
+              <section className="data-panel evidence-panel"><PanelHeading icon={FileSearch} tone="amber" title="Evidence" /><pre className="code-evidence">{`PERFORM 0000-MAINLINE\nPERFORM 1000-INITIALIZE\nCALL 'TAXCALC'\nCALL 'CEE3DLY'\nSQL --> INCLUDE\nSQL --> DECLARE`}</pre><div className="evidence-caption">INTPOST2.cbl · Parsed successfully</div><div className="evidence-actions"><Button onClick={openGraph}><Network size={15} />Open in graph</Button><Button variant="outline" onClick={() => notify("Impact analysis is ready")}>Impact analysis</Button><Button variant="outline" onClick={() => notify("Added to modernisation wave")}>Add to wave</Button><Button variant="outline" onClick={() => notify("Flagged for review")}>Flag for review</Button></div></section>
+            </div> : <section className="tab-content-panel"><PanelHeading icon={(sectionItems.find((item) => item.label === activeTab) ?? sectionItems[0]).icon} tone={(sectionItems.find((item) => item.label === activeTab) ?? sectionItems[0]).tone} title={activeTab} subtitle="INTPOST2 · Interest Posting" /><p>This program is connected to the settlement processing domain and shares data structures with account, tax, and reconciliation workflows.</p><div className="tab-content-stats"><span><IconTile icon={ListTree} tone="mint" size="sm" /><strong>15</strong> paragraphs</span><span><IconTile icon={FileCode2} tone="sky" size="sm" /><strong>6</strong> copybooks</span><span><IconTile icon={Table2} tone="amber" size="sm" /><strong>23</strong> referenced tables</span></div><Button onClick={openGraph}><Network size={15} />Explore relationships</Button></section>}
           </main>
         </div>
       )}
@@ -291,10 +337,10 @@ function MeridianApp() {
         <div className="workspace graph-workspace">
           <aside className="graph-nav">
             <button className="back-rail" onClick={() => setView("overview")}><ArrowLeft size={15} /> Overview</button>
-            {["Graph", "Impact", "Lineage", "Code", "API"].map((item) => <button key={item} className={item === "Graph" ? "graph-nav-item is-current" : "graph-nav-item"} onClick={() => item === "Graph" ? undefined : notify(`${item} view selected`)}>{item}</button>)}
+            {graphNavItems.map((item) => <button key={item.label} className={item.label === "Graph" ? "graph-nav-item is-current" : "graph-nav-item"} onClick={() => item.label === "Graph" ? undefined : notify(`${item.label} view selected`)}><IconTile icon={item.icon} tone={item.tone} />{item.label}</button>)}
           </aside>
           <aside className="filter-rail">
-            <div className="filter-title">Relationship filters <button onClick={() => setEnabledKinds(relationships.map(([name]) => String(name)))}>All</button><button onClick={() => setEnabledKinds([])}>None</button></div>
+            <div className="filter-title"><IconTile icon={Filter} tone="violet" size="xs" />Relationship filters <button onClick={() => setEnabledKinds(relationships.map(([name]) => String(name)))}>All</button><button onClick={() => setEnabledKinds([])}>None</button></div>
             <div className="filter-list">{relationships.map(([name]) => <label key={String(name)} className="filter-item"><input type="checkbox" checked={enabledKinds.includes(String(name))} onChange={() => setEnabledKinds((items) => items.includes(String(name)) ? items.filter((item) => item !== name) : [...items, String(name)])} /><span>{name}</span></label>)}</div>
           </aside>
           <main className="graph-main">
@@ -305,16 +351,16 @@ function MeridianApp() {
                 {graphNodes.map((node) => <circle key={node.id} cx={node.x} cy={node.y} r={node.id % 9 === 0 ? 5.4 : 4.1} fill={node.id === 0 ? "var(--graph-center)" : node.color} className="graph-node" onClick={() => setSelectedNode(node.id % 4 === 0 ? "TAXCALC" : node.id % 3 === 0 ? "GLPOST01" : "INTPOST2")} onDoubleClick={() => setSelectedNode(node.id % 4 === 0 ? "TAXCALC" : "GLPOST01")} />)}
               </svg>
             </section>
-            <div className="graph-stats"><div><strong>15</strong><span>programs<br />impacted</span></div><div><strong>6</strong><span>copybooks</span></div><div><strong>23</strong><span>tables</span></div></div>
-            <details className="raw-response graph-raw"><summary>Raw JSON response</summary><pre>{JSON.stringify({ node: selectedNode, relationships: enabledKinds.length, programsImpacted: 15 }, null, 2)}</pre></details>
+            <div className="graph-stats"><div><IconTile icon={Boxes} tone="violet" size="md" /><strong>15</strong><span>programs<br />impacted</span></div><div><IconTile icon={FileCode2} tone="mint" size="md" /><strong>6</strong><span>copybooks</span></div><div><IconTile icon={Table2} tone="amber" size="md" /><strong>23</strong><span>tables</span></div></div>
+            <details className="raw-response graph-raw"><summary><IconTile icon={Braces} tone="amber" size="xs" />Raw JSON response</summary><pre>{JSON.stringify({ node: selectedNode, relationships: enabledKinds.length, programsImpacted: 15 }, null, 2)}</pre></details>
           </main>
         </div>
       )}
-      {toast && <div className="toast-message" role="status">{toast}</div>}
+      {toast && <div className="toast-message" role="status"><IconTile icon={CircleCheck} tone="mint" size="xs" />{toast}</div>}
     </div>
   );
 }
 
-function PanelHeading({ title, subtitle }: { title: string; subtitle?: string }) {
-  return <div className="panel-heading"><strong>{title}</strong>{subtitle && <span>· {subtitle}</span>}</div>;
+function PanelHeading({ title, subtitle, icon, tone }: { title: string; subtitle?: string; icon: LucideIcon; tone: IconTone }) {
+  return <div className="panel-heading"><IconTile icon={icon} tone={tone} size="sm" /><strong>{title}</strong>{subtitle && <span>· {subtitle}</span>}</div>;
 }
