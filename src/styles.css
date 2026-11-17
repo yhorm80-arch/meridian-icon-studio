@@ -121,6 +121,20 @@
   --success: oklch(0.57 0.12 170);
   --shadow-soft: 0 4px 16px oklch(0.3 0.055 270 / 6%);
   --background-grid: oklch(0.55 0.055 278 / 5%);
+  --tone-violet: oklch(0.52 0.15 280);
+  --tone-violet-soft: oklch(0.93 0.045 285);
+  --tone-mint: oklch(0.55 0.11 172);
+  --tone-mint-soft: oklch(0.93 0.05 172);
+  --tone-blush: oklch(0.6 0.16 15);
+  --tone-blush-soft: oklch(0.94 0.04 15);
+  --tone-amber: oklch(0.62 0.14 65);
+  --tone-amber-soft: oklch(0.95 0.055 80);
+  --tone-sky: oklch(0.56 0.13 240);
+  --tone-sky-soft: oklch(0.93 0.04 240);
+  --tone-rose: oklch(0.56 0.15 340);
+  --tone-rose-soft: oklch(0.94 0.04 340);
+  --logo-tile: linear-gradient(145deg, oklch(0.42 0.1 272), oklch(0.24 0.07 270));
+  --logo-shadow: 0 6px 14px -4px oklch(0.25 0.08 270 / 45%), inset 0 1px 0 oklch(1 0 0 / 28%), inset 0 -3px 6px oklch(0 0 0 / 28%);
 }
 
 .dark {
@@ -162,6 +176,20 @@
   --success: oklch(0.78 0.095 175);
   --shadow-soft: 0 4px 18px oklch(0 0 0 / 22%);
   --background-grid: oklch(0.85 0.045 278 / 7%);
+  --tone-violet: oklch(0.78 0.11 285);
+  --tone-violet-soft: oklch(0.32 0.06 285);
+  --tone-mint: oklch(0.8 0.1 172);
+  --tone-mint-soft: oklch(0.32 0.05 172);
+  --tone-blush: oklch(0.78 0.12 15);
+  --tone-blush-soft: oklch(0.33 0.05 15);
+  --tone-amber: oklch(0.84 0.12 80);
+  --tone-amber-soft: oklch(0.34 0.05 80);
+  --tone-sky: oklch(0.8 0.1 240);
+  --tone-sky-soft: oklch(0.32 0.05 240);
+  --tone-rose: oklch(0.78 0.12 340);
+  --tone-rose-soft: oklch(0.33 0.05 340);
+  --logo-tile: linear-gradient(145deg, oklch(0.36 0.08 272), oklch(0.2 0.05 270));
+  --logo-shadow: 0 6px 14px -4px oklch(0 0 0 / 50%), inset 0 1px 0 oklch(1 0 0 / 18%), inset 0 -3px 6px oklch(0 0 0 / 35%);
 }
 
 @layer base {
@@ -178,7 +206,6 @@
 
 @layer components {
   .meridian-app { min-height: 100vh; color: var(--foreground); font-size: 13px; }
-  .meridian-app { background-color: var(--background); background-image: url("/images/bankio-finance-infographic.jpg"); background-position: top center; background-size: min(100vw, 1600px) auto; background-repeat: repeat-y; background-attachment: fixed; }
   .meridian-app svg { stroke-width: 1.7; }
   .topbar { height: 66px; display: flex; align-items: center; gap: 22px; padding: 0 22px; background: var(--card); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 10; }
   .brand { display: inline-flex; align-items: center; gap: 10px; border: 0; background: transparent; color: var(--foreground); font-size: 16px; font-weight: 700; white-space: nowrap; cursor: pointer; }
@@ -326,6 +353,53 @@
   .graph-stats span { color: var(--muted-foreground); font-size: 11px; line-height: 1.35; }
   .graph-raw { margin-top: 20px; }
   .toast-message { position: fixed; right: 24px; bottom: 22px; z-index: 20; padding: 12px 18px; border: 1px solid var(--border); border-radius: 6px; background: var(--card); box-shadow: var(--shadow-soft); color: var(--foreground); }
+
+  /* 2D duotone icon tiles */
+  .icon-tile { --tile-ink: var(--tone-violet); --tile-bg: var(--tone-violet-soft); position: relative; display: inline-grid; place-items: center; flex: 0 0 auto; width: 28px; height: 28px; border-radius: 9px; color: var(--tile-ink); background: linear-gradient(150deg, var(--tile-bg), color-mix(in oklab, var(--tile-bg) 70%, var(--tile-ink) 12%)); box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--tile-ink) 14%, transparent); overflow: hidden; }
+  .icon-tile::after { content: ""; position: absolute; width: 60%; height: 60%; right: -18%; top: -18%; border-radius: 50%; background: color-mix(in oklab, var(--tile-ink) 14%, transparent); }
+  .icon-tile svg { position: relative; z-index: 1; width: 15px; height: 15px; stroke-width: 2 !important; fill: color-mix(in oklab, var(--tile-ink) 20%, transparent); }
+  .icon-tile-xs { width: 20px; height: 20px; border-radius: 6px; }
+  .icon-tile-xs svg { width: 11px; height: 11px; }
+  .icon-tile-xs::after { display: none; }
+  .icon-tile-md { width: 40px; height: 40px; border-radius: 12px; }
+  .icon-tile-md svg { width: 19px; height: 19px; }
+  .icon-tile-lg { width: 50px; height: 50px; border-radius: 15px; }
+  .icon-tile-lg svg { width: 24px; height: 24px; }
+  .tone-violet { --tile-ink: var(--tone-violet); --tile-bg: var(--tone-violet-soft); }
+  .tone-mint { --tile-ink: var(--tone-mint); --tile-bg: var(--tone-mint-soft); }
+  .tone-blush { --tile-ink: var(--tone-blush); --tile-bg: var(--tone-blush-soft); }
+  .tone-amber { --tile-ink: var(--tone-amber); --tile-bg: var(--tone-amber-soft); }
+  .tone-sky { --tile-ink: var(--tone-sky); --tile-bg: var(--tone-sky-soft); }
+  .tone-rose { --tile-ink: var(--tone-rose); --tile-bg: var(--tone-rose-soft); }
+  .nav-item .icon-tile, .graph-nav-item .icon-tile { transition: transform .2s ease; }
+  .nav-item:hover .icon-tile, .graph-nav-item:hover .icon-tile { transform: translateY(-1px) rotate(-4deg); }
+  .nav-item.is-current .icon-tile { box-shadow: 0 3px 8px -3px var(--tile-ink), inset 0 0 0 1px color-mix(in oklab, var(--tile-ink) 25%, transparent); }
+
+  /* 3D logo */
+  .brand-mark-3d { position: relative; width: 40px; height: 40px; display: grid; place-items: center; flex: 0 0 auto; border-radius: 12px; background: var(--logo-tile); box-shadow: var(--logo-shadow); transform: perspective(240px) rotateX(8deg) rotateY(-10deg); transition: transform .35s ease; }
+  .brand-mark-3d img { width: 32px; height: 32px; object-fit: contain; filter: drop-shadow(0 2px 2px oklch(0 0 0 / 35%)); animation: logo-float 4s ease-in-out infinite; }
+  .brand:hover .brand-mark-3d { transform: perspective(240px) rotateX(0deg) rotateY(12deg) scale(1.05); }
+  .brand-text em { font-style: normal; color: var(--tone-mint); }
+  @keyframes logo-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-1.5px); } }
+
+  .page-heading-main { display: flex; align-items: center; gap: 16px; }
+  .copybook-list { list-style: none; padding-left: 0 !important; gap: 8px !important; }
+  .copybook-list li { display: flex; align-items: center; gap: 10px; }
+  .coupling { grid-template-columns: auto 1fr; align-items: center; column-gap: 9px; }
+  .coupling-text { display: grid; gap: 1px; }
+  .rail-label { display: flex; align-items: center; gap: 8px; }
+  .persona-pill { display: inline-flex; align-items: center; gap: 7px; padding-left: 5px; }
+  .tab { display: inline-flex; align-items: center; gap: 8px; }
+  .graph-nav-item { display: flex; align-items: center; gap: 10px; padding-left: 8px; }
+  .graph-nav-item.is-current .icon-tile { --tile-bg: var(--primary-foreground); }
+  .filter-title { gap: 8px; }
+  .raw-response summary { display: inline-flex; align-items: center; gap: 8px; }
+  .result-fields > div { grid-template-columns: auto 1fr; column-gap: 10px; align-items: center; }
+  .result-fields > div .icon-tile { grid-row: span 2; }
+  .tab-content-stats span { display: inline-flex; align-items: center; gap: 8px; }
+  .toast-message { display: flex; align-items: center; gap: 10px; }
+  .panel-heading { align-items: center; }
+  .evidence-actions button svg { width: 14px; height: 14px; }
   @media (max-width: 1120px) {
     .search-workspace, .overview-workspace { grid-template-columns: 210px minmax(0, 1fr); }
     .overview-grid { grid-template-columns: 1fr 1fr; }
@@ -337,7 +411,9 @@
     .topbar { height: 58px; gap: 10px; padding-inline: 12px; }
     .brand { font-size: 14px; }
     .top-search { width: auto; flex: 1; }
-    .top-search > svg { display: none; }
+    .top-search > .icon-tile { display: none; }
+    .brand-text { display: none; }
+    .page-heading-main > .icon-tile { display: none; }
     .persona-pill { padding-inline: 9px; font-size: 9px; }
     .help-button { display: none; }
     .workspace { min-height: calc(100vh - 58px); }
