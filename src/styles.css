@@ -262,6 +262,14 @@
   .page-heading, .hero-card { position: relative; isolation: isolate; padding: 18px 20px; border-radius: 14px; overflow: hidden; background: linear-gradient(120deg, color-mix(in oklab, var(--tone-sky) 14%, var(--card)), color-mix(in oklab, var(--primary) 6%, var(--card)) 60%, var(--card)); border: 1px solid var(--border); }
   .program-hero { margin-bottom: 18px; }
   .program-hero .program-title { margin-bottom: 0; }
+  .pi-code rect { fill: color-mix(in oklab, var(--primary) 22%, transparent); }
+  .pi-flow path { fill: none; stroke: color-mix(in oklab, var(--primary) 40%, transparent); stroke-width: 1.5; stroke-dasharray: 4 3; }
+  .pi-box { stroke-width: 1.4; }
+  .pi-box.b0 { fill: color-mix(in oklab, var(--tone-sky) 30%, transparent); stroke: var(--tone-sky); }
+  .pi-box.b1 { fill: color-mix(in oklab, var(--primary) 18%, transparent); stroke: var(--primary); }
+  .pi-box.b2 { fill: color-mix(in oklab, var(--success) 20%, transparent); stroke: var(--success); }
+  .pi-db ellipse, .pi-db path { fill: color-mix(in oklab, var(--tone-sky) 20%, transparent); stroke: color-mix(in oklab, var(--primary) 45%, transparent); stroke-width: 1.5; }
+  .pi-gear circle { fill: none; stroke: color-mix(in oklab, var(--primary) 35%, transparent); stroke-width: 3; stroke-dasharray: 5 3; }
   .heading-infographic { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; opacity: 0.4; -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 55%, transparent 100%); mask-image: linear-gradient(90deg, #000 0%, #000 55%, transparent 100%); }
   .info-grid line { stroke: color-mix(in oklab, var(--primary) 12%, transparent); stroke-width: 1; }
   .info-links path { fill: none; stroke: color-mix(in oklab, var(--primary) 35%, transparent); stroke-width: 1.4; stroke-dasharray: 4 4; }

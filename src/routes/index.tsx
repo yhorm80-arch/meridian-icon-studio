@@ -336,7 +336,7 @@ function MeridianApp() {
           </aside>
           <main className="main-content overview-main">
             <button className="inline-back" onClick={() => setView("search")}><ArrowLeft size={15} />Back to search</button>
-            <div className="hero-card program-hero"><HeadingInfographic /><div className="breadcrumbs">Portfolio <ChevronRight size={13} /> Settlement <ChevronRight size={13} /> <strong>INTPOST2</strong></div>
+            <div className="hero-card program-hero"><ProgramInfographic /><div className="breadcrumbs">Portfolio <ChevronRight size={13} /> Settlement <ChevronRight size={13} /> <strong>INTPOST2</strong></div>
             <div className="program-title"><IconTile icon={FileCode2} tone="violet" size="lg" /><h1>INTPOST2</h1><span>Interest Posting</span><span className="program-chip"><span className="risk-dot high" /> Critical risk</span></div></div>
             <nav className="tabs" aria-label="Program details">
               {sectionItems.map((tab) => <button key={tab.label} className={activeTab === tab.label ? "tab is-active" : "tab"} onClick={() => setActiveTab(tab.label)}><IconTile icon={tab.icon} tone={tab.tone} size="xs" />{tab.label}</button>)}
@@ -390,5 +390,20 @@ function HeadingInfographic() {
     <g className="info-bars">{[26,44,34,58,48,70,62].map((h,i) => <rect key={i} x={360 + i * 18} y={150 - h} width="10" height={h} rx="3" />)}</g>
     <g className="info-rings"><circle cx="470" cy="40" r="26" /><circle cx="470" cy="40" r="16" /></g>
   </svg>
+  );
+}
+
+function ProgramInfographic() {
+  const lines = [60, 110, 80, 140, 95, 70, 125, 50];
+  return (
+    <svg className="heading-infographic program-infographic" viewBox="0 0 520 150" aria-hidden="true" preserveAspectRatio="xMinYMid meet">
+      <g className="pi-code">{lines.map((w, i) => <rect key={i} x={i % 3 === 0 ? 24 : 40} y={14 + i * 16} width={w} height="5" rx="2.5" />)}</g>
+      <g className="pi-flow">
+        <path d="M200 30 H250 M300 30 V60 M300 85 H350 M300 85 V115 H250" />
+        {[[200, 18], [250, 18], [270, 60], [350, 73], [200, 103]].map(([x, y], i) => <rect key={i} x={x} y={y} width="50" height="24" rx="6" className={`pi-box b${i % 3}`} />)}
+      </g>
+      <g className="pi-db"><ellipse cx="440" cy="40" rx="26" ry="9" /><path d="M414 40 V96 A26 9 0 0 0 466 96 V40" /><path d="M414 68 A26 9 0 0 0 466 68" /></g>
+      <g className="pi-gear"><circle cx="470" cy="122" r="12" /><circle cx="470" cy="122" r="4" /></g>
+    </svg>
   );
 }
