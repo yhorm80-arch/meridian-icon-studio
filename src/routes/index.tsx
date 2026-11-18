@@ -22,7 +22,6 @@ import {
   Landmark,
   Layers3,
   LayoutDashboard,
-  Link2,
   ListTree,
   Network,
   Plug,
@@ -92,16 +91,19 @@ const copybooks: { name: string; note: string; tone: IconTone }[] = [
 ];
 
 const programs = [
-  { name: "CEE3DLY", risk: "low" },
-  { name: "DSNTIAR", risk: "low" },
-  { name: "GLPOST01", risk: "high" },
-  { name: "IKJEFT01", risk: "low" },
-  { name: "INTPOST2", risk: "high" },
-  { name: "RECON001", risk: "high" },
-  { name: "TAXCALC", risk: "low" },
-  { name: "TRDORD01", risk: "low" },
-  { name: "TRDSETL1", risk: "high" },
+  { name: "CEE3DLY", risk: "low", score: 18 },
+  { name: "DSNTIAR", risk: "low", score: 22 },
+  { name: "GLPOST01", risk: "high", score: 84 },
+  { name: "IKJEFT01", risk: "low", score: 15 },
+  { name: "INTPOST2", risk: "high", score: 92 },
+  { name: "RECON001", risk: "high", score: 78 },
+  { name: "TAXCALC", risk: "low", score: 31 },
+  { name: "TRDORD01", risk: "low", score: 27 },
+  { name: "TRDSETL1", risk: "high", score: 81 },
 ];
+
+const highRisk = programs.filter((program) => program.risk === "high").sort((a, b) => b.score - a.score);
+const lowRisk = programs.filter((program) => program.risk === "low");
 
 const relationships = [
   ["ACCESSES", 82],
@@ -120,14 +122,6 @@ const relationships = [
   ["WRITES_FILE", 6],
   ["COUPLED_VIA_DATA", 2],
   ["COUPLED_VIA_SQL", 2],
-];
-
-const couplings: [string, string][] = [
-  ["GLPOST01", "INTPOST2"],
-  ["GLPOST01", "TRDSETL1"],
-  ["INTPOST2", "RECON001"],
-  ["INTPOST2", "TRDSETL1"],
-  ["RECON001", "TRDSETL1"],
 ];
 
 const paragraphs = [
@@ -239,18 +233,37 @@ function MeridianApp() {
               <button className="nav-item" onClick={() => notify("Integrity selected")}><IconTile icon={Activity} tone="mint" />Integrity</button>
               <button className="nav-item" onClick={() => notify("Curation selected")}><IconTile icon={Layers3} tone="rose" />Curation</button>
             </nav>
-            <div className="rail-section">
-              <div className="rail-label"><IconTile icon={Gauge} tone="blush" size="xs" />Risk summary</div>
-              {programs.map((program) => (
-                <button key={program.name} className="risk-program" onClick={() => { setQuery(program.name); submitSearch(); }}>
-                  <span className={`risk-dot ${program.risk}`} />{program.name}
-                </button>
-              ))}
-            </div>
-            <div className="rail-section coupling-section">
-              <div className="rail-label"><IconTile icon={Link2} tone="violet" size="xs" />Program couplings</div>
-              {couplings.map(([a, b]) => <button className="coupling" key={`${a}-${b}`} onClick={() => { setQuery(a); submitSearch(); }}><IconTile icon={Link2} tone="sky" size="xs" /><span className="coupling-text"><strong>{a} → {b}</strong><span>COUPLED_VIA_SQL · conf 0.90</span></span></button>)}
-            </div>
+            <section className="rail-section risk-summary" aria-label="Risk summary">
+              <div className="rail-label"><IconTile icon={Gauge} tone="sky" size="xs" />Risk summary</div>
+              <div className="risk-overview">
+                <div className="risk-overview-top">
+                  <span className="risk-total"><strong>{programs.length}</strong>programs</span>
+                  <span className="risk-legend"><span><span className="risk-dot high" />{highRisk.length} high</span><span><span className="risk-dot" />{lowRisk.length} low</span></span>
+                </div>
+                <div className="risk-ratio" role="img" aria-label={`${highRisk.length} high risk, ${lowRisk.length} low risk`}>
+                  <span className="risk-ratio-high" style={{ flexGrow: highRisk.length }} />
+                  <span className="risk-ratio-low" style={{ flexGrow: lowRisk.length }} />
+                </div>
+              </div>
+              <div className="risk-group-label"><ShieldAlert size={12} />Needs attention</div>
+              <div className="risk-cards">
+                {highRisk.map((program) => (
+                  <button key={program.name} className="risk-card" onClick={() => { setQuery(program.name); submitSearch(); }}>
+                    <span className="risk-card-top"><strong>{program.name}</strong><span className="risk-pill">High</span></span>
+                    <span className="risk-meter"><span style={{ width: `${program.score}%` }} /></span>
+                    <span className="risk-card-score">Risk score {program.score}</span>
+                  </button>
+                ))}
+              </div>
+              <div className="risk-group-label is-stable"><CircleCheck size={12} />Stable</div>
+              <div className="risk-chips">
+                {lowRisk.map((program) => (
+                  <button key={program.name} className="risk-chip" onClick={() => { setQuery(program.name); submitSearch(); }}>
+                    <span className="risk-dot" />{program.name}
+                  </button>
+                ))}
+              </div>
+            </section>
           </aside>
 
           <main className="main-content search-main">
