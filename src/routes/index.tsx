@@ -268,13 +268,7 @@ function MeridianApp() {
 
           <main className="main-content search-main">
             <div className="page-heading">
-              <svg className="heading-infographic" viewBox="0 0 520 150" aria-hidden="true" preserveAspectRatio="xMinYMid meet">
-                <g className="info-grid">{Array.from({ length: 14 }, (_, i) => <line key={i} x1={i * 40} y1="0" x2={i * 40} y2="150" />)}{Array.from({ length: 5 }, (_, i) => <line key={`h${i}`} x1="0" y1={i * 36} x2="520" y2={i * 36} />)}</g>
-                <g className="info-links"><path d="M30 110 L95 60 L170 92 L240 40 L320 78 L400 30 L480 62" /><path d="M95 60 L120 130 M240 40 L260 120 M400 30 L430 115" /></g>
-                {[[30,110],[95,60],[170,92],[240,40],[320,78],[400,30],[480,62],[120,130],[260,120],[430,115]].map(([x,y],i) => <circle key={i} cx={x} cy={y} r={i % 3 === 0 ? 6 : 4} className={`info-node n${i % 3}`} />)}
-                <g className="info-bars">{[26,44,34,58,48,70,62].map((h,i) => <rect key={i} x={360 + i * 18} y={150 - h} width="10" height={h} rx="3" />)}</g>
-                <g className="info-rings"><circle cx="470" cy="40" r="26" /><circle cx="470" cy="40" r="16" /></g>
-              </svg>
+              <HeadingInfographic />
               <div className="page-heading-main">
                 <IconTile icon={Landmark} tone="violet" size="lg" />
                 <div>
@@ -342,8 +336,8 @@ function MeridianApp() {
           </aside>
           <main className="main-content overview-main">
             <button className="inline-back" onClick={() => setView("search")}><ArrowLeft size={15} />Back to search</button>
-            <div className="breadcrumbs">Portfolio <ChevronRight size={13} /> Settlement <ChevronRight size={13} /> <strong>INTPOST2</strong></div>
-            <div className="program-title"><IconTile icon={FileCode2} tone="violet" size="lg" /><h1>INTPOST2</h1><span>Interest Posting</span><span className="program-chip"><span className="risk-dot high" /> Critical risk</span></div>
+            <div className="hero-card program-hero"><HeadingInfographic /><div className="breadcrumbs">Portfolio <ChevronRight size={13} /> Settlement <ChevronRight size={13} /> <strong>INTPOST2</strong></div>
+            <div className="program-title"><IconTile icon={FileCode2} tone="violet" size="lg" /><h1>INTPOST2</h1><span>Interest Posting</span><span className="program-chip"><span className="risk-dot high" /> Critical risk</span></div></div>
             <nav className="tabs" aria-label="Program details">
               {sectionItems.map((tab) => <button key={tab.label} className={activeTab === tab.label ? "tab is-active" : "tab"} onClick={() => setActiveTab(tab.label)}><IconTile icon={tab.icon} tone={tab.tone} size="xs" />{tab.label}</button>)}
             </nav>
@@ -386,4 +380,15 @@ function MeridianApp() {
 
 function PanelHeading({ title, subtitle, icon, tone }: { title: string; subtitle?: string; icon: LucideIcon; tone: IconTone }) {
   return <div className="panel-heading"><IconTile icon={icon} tone={tone} size="sm" /><strong>{title}</strong>{subtitle && <span>· {subtitle}</span>}</div>;
+}
+function HeadingInfographic() {
+  return (
+  <svg className="heading-infographic" viewBox="0 0 520 150" aria-hidden="true" preserveAspectRatio="xMinYMid meet">
+    <g className="info-grid">{Array.from({ length: 14 }, (_, i) => <line key={i} x1={i * 40} y1="0" x2={i * 40} y2="150" />)}{Array.from({ length: 5 }, (_, i) => <line key={`h${i}`} x1="0" y1={i * 36} x2="520" y2={i * 36} />)}</g>
+    <g className="info-links"><path d="M30 110 L95 60 L170 92 L240 40 L320 78 L400 30 L480 62" /><path d="M95 60 L120 130 M240 40 L260 120 M400 30 L430 115" /></g>
+    {[[30,110],[95,60],[170,92],[240,40],[320,78],[400,30],[480,62],[120,130],[260,120],[430,115]].map(([x,y],i) => <circle key={i} cx={x} cy={y} r={i % 3 === 0 ? 6 : 4} className={`info-node n${i % 3}`} />)}
+    <g className="info-bars">{[26,44,34,58,48,70,62].map((h,i) => <rect key={i} x={360 + i * 18} y={150 - h} width="10" height={h} rx="3" />)}</g>
+    <g className="info-rings"><circle cx="470" cy="40" r="26" /><circle cx="470" cy="40" r="16" /></g>
+  </svg>
+  );
 }
